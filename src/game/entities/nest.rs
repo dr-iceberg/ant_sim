@@ -6,12 +6,12 @@ use crate::game::entities::ant::Ant;
 #[derive(Debug)]
 pub struct Nest {
     ants: Vec<Ant>,
-    food: i32,
+    food: u32,
 }
 
 #[allow(dead_code)]
 impl Nest {
-    pub fn new(ant_count: i32, starting_food: i32) -> Self {
+    pub fn new(ant_count: i32, starting_food: u32) -> Self {
         Nest {
             ants: vec![Ant::new(); ant_count as usize],
             food: starting_food,
@@ -28,7 +28,7 @@ impl Nest {
         &self.ants
     }
 
-    pub fn food(&self) -> i32 {
+    pub fn food(&self) -> u32 {
         self.food
     }
 }

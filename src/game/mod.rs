@@ -12,7 +12,7 @@ const CRATE_NAME: &str = env!("CARGO_PKG_NAME");
 pub fn run() -> GameResult {
     let window_title = "Rust game";
     let cb = ggez::ContextBuilder::new(CRATE_NAME, "me")
-        .window_setup(WindowSetup::default().title(window_title).vsync(true))
+        .window_setup(WindowSetup::default().title(window_title).vsync(false))
         .add_resource_path("./resources");
 
     let (mut ctx, event_loop) = cb.build()?;

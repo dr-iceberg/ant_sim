@@ -43,6 +43,7 @@ impl Renderer {
 
 
     fn render_ant(&mut self, ant: &Ant, canvas: &mut Canvas) {
+        // this is a different angle for rotation
         let angle = ant.vel().angle_between(Vec2 { x: -1., y: 0. });
         let scale = 0.2;
         canvas.draw(

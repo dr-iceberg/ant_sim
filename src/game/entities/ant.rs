@@ -23,13 +23,13 @@ impl Ant {
     pub fn new() -> Self {
         Ant {
             pos: Vec2 { x: 100., y: 100. },
-            vel: Vec2 { x: 1., y: 1. },
+            vel: Vec2 { x: 100., y: 100. },
             state: AntState::FoodSearch,
             timer: 0.,
         }
     }
 
-    pub fn update(&mut self, _dt: f32) {
+    pub fn update(&mut self, dt: f32) {
         //self.timer += dt;
         if self.timer >= 1. {
             let current_angle = self.vel.angle_between(Vec2 { x: 1., y: 0. });
@@ -39,7 +39,7 @@ impl Ant {
             self.vel = Vec2::from_angle(angle) * self.vel.length();
             self.timer = 0.;
         }
-        self.pos += self.vel;
+        self.pos += self.vel * dt;
     }
 
 
