@@ -1,24 +1,24 @@
-use crate::game::entities::nest::Nest;
-use crate::game::rendering::assets::AssetManager;
-use ggez::{Context, GameResult, graphics::Canvas};
+use crate::game::entities::{food::Food, nest::Nest};
+use ggez::{Context, GameResult};
 
 pub struct World {
     nest: Nest,
+    food_vec: Vec<Food>,
 }
 
 impl World {
-    pub fn new(ctx: &Context) -> GameResult<World> {
+    pub fn new() -> GameResult<World> {
+        let ant_count = 1;
+        let starting_nest_food = 100;
+        let food_vec = vec![Food::new()];
         Ok(World {
-            nest: Nest::new(1, 100),
+            nest: Nest::new(ant_count, starting_nest_food),
+            food_vec: food_vec,
         })
     }
 
     pub fn update(&mut self, ctx: &mut Context) {
         self.nest.update(ctx);
-    }
-
-    pub fn render(&mut self, canvas: &mut Canvas, asset_manager: &AssetManager) {
-        self.nest.render(canvas, asset_manager);
     }
 
     pub fn nest(&self) -> &Nest {

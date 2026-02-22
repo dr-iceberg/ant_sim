@@ -8,6 +8,7 @@ use crate::game::world::World;
 use crate::game::entities::{ant::Ant, food::Food};
 use crate::game::rendering::assets::AssetManager;
 
+#[allow(dead_code)]
 pub struct Renderer {
     assets: AssetManager,
     food_mesh: Mesh,
@@ -31,7 +32,7 @@ impl Renderer {
         }
     }
     
-    pub fn render_world(&mut self, ctx: &Context, canvas: &mut Canvas, world: &World) {
+    pub fn render_world(&mut self, _ctx: &Context, canvas: &mut Canvas, world: &World) {
         for ant in world.nest().ants() {
             self.render_ant(ant, canvas);
         }
@@ -51,5 +52,7 @@ impl Renderer {
         );
     }
 
-    fn render_food(&mut self, ctx: &Context, food: &Food) {}
+    fn render_food(&mut self, _ctx: &Context, canvas: &mut Canvas, food: &Food) {
+        
+    }
 }

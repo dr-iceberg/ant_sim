@@ -1,11 +1,10 @@
 use ggez::{
     glam::Vec2,
-    graphics::{Canvas, DrawParam},
 };
 
-use crate::game::rendering::assets::AssetManager;
 use std::f32::consts::PI;
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 pub enum AntState {
     Idle,
@@ -19,7 +18,7 @@ pub struct Ant {
     state: AntState,
     timer: f32,
 }
-
+#[allow(dead_code)]
 impl Ant {
     pub fn new() -> Self {
         Ant {
@@ -30,7 +29,7 @@ impl Ant {
         }
     }
 
-    pub fn update(&mut self, dt: f32) {
+    pub fn update(&mut self, _dt: f32) {
         //self.timer += dt;
         if self.timer >= 1. {
             let current_angle = self.vel.angle_between(Vec2 { x: 1., y: 0. });
@@ -43,18 +42,6 @@ impl Ant {
         self.pos += self.vel;
     }
 
-    pub fn render(&self, canvas: &mut Canvas, asset_manager: &AssetManager) {
-        let angle = self.vel.angle_between(Vec2 { x: -1., y: 0. });
-        let scale = 0.2;
-        canvas.draw(
-            asset_manager.ant_png(),
-            DrawParam::default()
-                .dest(self.pos)
-                .rotation(angle)
-                .offset([0.5, 0.5])
-                .scale([scale, scale]),
-        );
-    }
 
     pub fn pos(&self) -> Vec2 {
         self.pos
@@ -63,7 +50,7 @@ impl Ant {
     pub fn vel(&self) -> Vec2 {
         self.vel
     }
-
+    
     pub fn state(&self) -> &AntState {
         &self.state
     }

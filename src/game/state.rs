@@ -17,7 +17,7 @@ impl MainState {
     pub fn new(ctx: &mut Context) -> GameResult<MainState> {
         Ok(MainState {
             renderer: Renderer::new(&ctx.gfx),
-            world: World::new(ctx).unwrap(),
+            world: World::new().unwrap(),
         })
     }
 }

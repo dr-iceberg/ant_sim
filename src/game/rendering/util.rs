@@ -4,12 +4,13 @@ use ggez::{
 };
 
 /// An utility struct for a simple circle
+#[allow(dead_code)]
 pub struct Circle {
     pos: Vec2,
     radius: f32,
     mesh: graphics::Mesh,
 }
-
+#[allow(dead_code)]
 impl Circle {
     pub fn new(gfx: &GraphicsContext, pos: Vec2, radius: f32, color: Color) -> Self {
         Self {

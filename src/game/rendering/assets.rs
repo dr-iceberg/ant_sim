@@ -3,6 +3,7 @@ use ggez::{
     graphics::{GraphicsContext, Image, Rect},
 };
 
+#[allow(dead_code)]
 pub struct AssetManager {
     ant_png: Image,
     ant_img: Image,
@@ -20,7 +21,7 @@ impl AssetManager {
             ant_sprites: Vec::new(),
         })
     }
-
+    #[allow(dead_code)]
     pub fn ant_img(&self) -> &Image {
         &self.ant_img
     }
