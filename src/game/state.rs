@@ -3,10 +3,7 @@ use ggez::{
     graphics::{Canvas, Color},
 };
 
-use crate::game::{
-    rendering::{renderer::{Renderer}},
-    world::World,
-};
+use crate::game::{rendering::renderer::Renderer, world::World};
 
 pub struct MainState {
     renderer: Renderer,
@@ -30,9 +27,9 @@ impl event::EventHandler for MainState {
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
         let mut canvas = Canvas::from_frame(ctx, Color::from([0.1, 0.2, 0.3, 1.0]));
-        
+
         self.renderer.render_world(ctx, &mut canvas, &self.world);
-        
+
         canvas.finish(ctx)
     }
 }

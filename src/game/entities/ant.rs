@@ -1,6 +1,4 @@
-use ggez::{
-    glam::Vec2,
-};
+use ggez::glam::Vec2;
 
 use std::f32::consts::PI;
 
@@ -42,7 +40,6 @@ impl Ant {
         self.pos += self.vel * dt;
     }
 
-
     pub fn pos(&self) -> Vec2 {
         self.pos
     }
@@ -50,7 +47,7 @@ impl Ant {
     pub fn vel(&self) -> Vec2 {
         self.vel
     }
-    
+
     pub fn state(&self) -> &AntState {
         &self.state
     }

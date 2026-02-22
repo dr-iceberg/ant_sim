@@ -1,4 +1,4 @@
-use ggez::Context;
+use ggez::{Context, glam::Vec2};
 
 use crate::game::entities::ant::Ant;
 
@@ -6,14 +6,16 @@ use crate::game::entities::ant::Ant;
 #[derive(Debug)]
 pub struct Nest {
     ants: Vec<Ant>,
+    pos: Vec2,
     food: u32,
 }
 
 #[allow(dead_code)]
 impl Nest {
-    pub fn new(ant_count: i32, starting_food: u32) -> Self {
+    pub fn new(ant_count: i32, starting_food: u32, pos: Vec2) -> Self {
         Nest {
             ants: vec![Ant::new(); ant_count as usize],
+            pos: pos,
             food: starting_food,
         }
     }
@@ -30,5 +32,9 @@ impl Nest {
 
     pub fn food(&self) -> u32 {
         self.food
+    }
+
+    pub fn pos(&self) -> Vec2 {
+        self.pos
     }
 }
