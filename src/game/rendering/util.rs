@@ -1,7 +1,6 @@
 use ggez::{
-    Context,
     glam::*,
-    graphics::{self, Color},
+    graphics::{self, Color, GraphicsContext},
 };
 
 /// An utility struct for a simple circle
@@ -12,12 +11,12 @@ pub struct Circle {
 }
 
 impl Circle {
-    pub fn new(ctx: &Context, pos: Vec2, radius: f32, color: Color) -> Self {
+    pub fn new(gfx: &GraphicsContext, pos: Vec2, radius: f32, color: Color) -> Self {
         Self {
             pos,
             radius,
             mesh: graphics::Mesh::new_circle(
-                ctx,
+                gfx,
                 graphics::DrawMode::fill(),
                 Vec2 { x: 0., y: 0. },
                 radius,

@@ -20,4 +20,8 @@ impl World {
     pub fn render(&mut self, canvas: &mut Canvas, asset_manager: &AssetManager) {
         self.nest.render(canvas, asset_manager);
     }
+
+    pub fn nest(&self) -> &Nest {
+        &self.nest
+    }
 }

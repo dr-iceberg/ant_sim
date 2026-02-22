@@ -3,17 +3,20 @@ use ggez::{
     graphics::{Canvas, Color},
 };
 
-use crate::game::{rendering::assets::AssetManager, world::World};
+use crate::game::{
+    rendering::{renderer::{Renderer}},
+    world::World,
+};
 
 pub struct MainState {
-    asset_manager: AssetManager,
+    renderer: Renderer,
     world: World,
 }
 
 impl MainState {
     pub fn new(ctx: &mut Context) -> GameResult<MainState> {
         Ok(MainState {
-            asset_manager: AssetManager::new(&ctx.gfx).unwrap(),
+            renderer: Renderer::new(&ctx.gfx),
             world: World::new(ctx).unwrap(),
         })
     }
@@ -27,7 +30,9 @@ impl event::EventHandler for MainState {
 
     fn draw(&mut self, ctx: &mut Context) -> GameResult {
         let mut canvas = Canvas::from_frame(ctx, Color::from([0.1, 0.2, 0.3, 1.0]));
-        self.world.render(&mut canvas, &self.asset_manager);
+        
+        self.renderer.render_world(ctx, &mut canvas, &self.world);
+        
         canvas.finish(ctx)
     }
 }

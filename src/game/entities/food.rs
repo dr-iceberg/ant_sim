@@ -1,11 +1,9 @@
-use ggez::{glam::Vec2, graphics::Canvas};
-
-use crate::game::rendering::assets::AssetManager;
+use ggez::glam::Vec2;
 
 #[derive(Debug)]
 pub struct Food {
     pos: Vec2,
-    energy: i32,
+    energy: u32,
 }
 
 impl Food {
@@ -15,6 +13,4 @@ impl Food {
             energy: 50,
         }
     }
-
-    pub fn render(&self, canvas: &Canvas, asset_manager: &AssetManager) {}
 }

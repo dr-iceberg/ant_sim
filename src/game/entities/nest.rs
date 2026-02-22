@@ -1,4 +1,3 @@
-
 use ggez::Context;
 use ggez::graphics::Canvas;
 
@@ -18,22 +17,24 @@ impl Nest {
             food: starting_food,
         }
     }
-    
-    pub fn update(&mut self, ctx: &mut Context)
-    {
-        
-        for ant in self.ants.iter_mut()
-        {
+
+    pub fn update(&mut self, ctx: &mut Context) {
+        for ant in self.ants.iter_mut() {
             ant.update(ctx.time.delta().as_secs_f32());
         }
     }
-    
-    pub fn render(&self, canvas: &mut Canvas, asset_manager: &AssetManager)
-    {
-        
-        for ant in self.ants.iter()
-        {
+
+    pub fn render(&self, canvas: &mut Canvas, asset_manager: &AssetManager) {
+        for ant in self.ants.iter() {
             ant.render(canvas, asset_manager);
         }
+    }
+
+    pub fn ants(&self) -> &[Ant] {
+        &self.ants
+    }
+
+    pub fn food(&self) -> i32 {
+        self.food
     }
 }
