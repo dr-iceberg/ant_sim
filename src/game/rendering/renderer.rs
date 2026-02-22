@@ -36,6 +36,9 @@ impl Renderer {
         for ant in world.nest().ants() {
             self.render_ant(ant, canvas);
         }
+        for food in world.food_vec() {
+            self.render_food(canvas, food);
+        }
     }
 
 
@@ -52,7 +55,7 @@ impl Renderer {
         );
     }
 
-    fn render_food(&mut self, _ctx: &Context, canvas: &mut Canvas, food: &Food) {
-        
+    fn render_food(&mut self, canvas: &mut Canvas, food: &Food) {
+        canvas.draw(&self.food_mesh, DrawParam::default().dest(food.pos()));
     }
 }

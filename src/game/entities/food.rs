@@ -9,10 +9,18 @@ pub struct Food {
 
 #[allow(dead_code)]
 impl Food {
-    pub fn new() -> Self {
+    pub fn new(pos: Vec2) -> Self {
         Food {
-            pos: Vec2 { x: 100., y: 100. },
+            pos: pos,
             energy: 50,
         }
+    }
+
+    pub fn pos(&self) -> Vec2 {
+        self.pos
+    }
+
+    pub fn energy(&self) -> u32 {
+        self.energy
     }
 }
