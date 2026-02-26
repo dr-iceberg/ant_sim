@@ -1,4 +1,5 @@
 use ggez::Context;
+use ggez::graphics::Rect;
 use ggez::{
     glam::Vec2,
     graphics::{Canvas, Color, DrawMode, DrawParam, GraphicsContext, Mesh},
@@ -62,10 +63,18 @@ impl Renderer {
     fn render_ant(&mut self, ant: &Ant, canvas: &mut Canvas, assets: &AssetManager) {
         // this is a different angle for rotation
         let angle = ant.vel().angle_between(Vec2 { x: -1., y: 0. });
-        let scale = 0.2;
-        let rect = ant.animation().get_current_frame();
+        let scale = 1.;
+        let img = assets.ant_sprite_sheet().img();
+        let frame = ant.animation().get_current_frame();
+        let rect = Rect {
+            x: frame.x / img.width() as f32,
+            y: frame.y / img.height() as f32,
+            w: frame.w / img.width() as f32,
+            h: frame.h / img.height() as f32,
+        };
+
         canvas.draw(
-            assets.ant_sprite_sheet().img(),
+            img,
             DrawParam::default()
                 .dest(ant.pos())
                 .rotation(angle)

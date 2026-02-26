@@ -1,6 +1,6 @@
 use ggez::{
     GameResult,
-    graphics::{GraphicsContext, Image, Rect},
+    graphics::{GraphicsContext, Image},
 };
 
 pub struct Asset {
@@ -8,6 +8,7 @@ pub struct Asset {
 }
 
 impl Asset {
+    #[allow(dead_code)]
     pub fn new(gfx: &GraphicsContext, path: &str) -> Self {
         Asset {
             img: Image::from_path(gfx, path).unwrap(),

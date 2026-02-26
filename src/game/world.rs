@@ -20,7 +20,7 @@ impl World {
         })
     }
 
-    pub fn update(&mut self, ctx: &mut Context, animations: &AnimationManager) {
+    pub fn update(&mut self, ctx: &mut Context, _animations: &AnimationManager) {
         self.nest.update(ctx);
     }
 

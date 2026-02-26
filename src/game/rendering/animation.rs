@@ -14,15 +14,12 @@ pub struct Animation {
     timer: f32,
 }
 
-pub struct AnimationManager {
-    ant_animations: HashMap<AntState, Animation>,
-}
-
 impl Animation {
     pub fn update(&mut self, dt: f32) {
         self.timer += dt;
         if self.timer >= self.frame_time {
             self.current_frame = (self.current_frame + 1) % self.sprite_frames.len();
+            self.timer = 0.;
         }
     }
     pub fn get_current_frame(&self) -> Rect {
@@ -30,10 +27,15 @@ impl Animation {
     }
 }
 
+pub struct AnimationManager {
+    #[allow(dead_code)]
+    ant_animations: HashMap<AntState, Animation>,
+}
+
 impl AnimationManager {
     pub fn new(assets: &AssetManager) -> Self {
         let mut ant_animations = HashMap::new();
-        ant_animations.insert(AntState::Idle, Animation::default());
+        ant_animations.insert(AntState::Idle, Self::ant_idle(assets));
         ant_animations.insert(AntState::FoodSearch, Self::ant_walk(assets));
 
         AnimationManager {
@@ -41,7 +43,7 @@ impl AnimationManager {
         }
     }
 
-    pub fn ant_walk(assets: &AssetManager) -> Animation {
+    fn ant_rects(assets: &AssetManager) -> Vec<Rect> {
         let sprite_rows = 8;
         let sprite_columns = 8;
         let sprite_count = 62;
@@ -59,15 +61,30 @@ impl AnimationManager {
 
             frames.push(rect);
         }
+        frames
+    }
 
+    pub fn ant_walk(assets: &AssetManager) -> Animation {
+        let frames = Self::ant_rects(assets);
         Animation {
             sprite_frames: frames,
             current_frame: 0,
-            frame_time: 0.2,
+            frame_time: 0.005,
             timer: 0.,
         }
     }
 
+    pub fn ant_idle(assets: &AssetManager) -> Animation {
+        let frame = vec![Self::ant_rects(assets).first().unwrap().clone()];
+        Animation {
+            sprite_frames: frame,
+            current_frame: 0,
+            frame_time: 5.,
+            timer: 0.,
+        }
+    }
+
+    #[allow(dead_code)]
     pub fn ant_animations(&self) -> &HashMap<AntState, Animation> {
         &self.ant_animations
     }

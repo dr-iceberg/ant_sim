@@ -1,8 +1,8 @@
-use ggez::{glam::Vec2, graphics::Rect};
+use ggez::glam::Vec2;
 
 //use std::f32::consts::PI;
 
-use crate::game::rendering::{animation::Animation, assets::AssetMetadata};
+use crate::game::rendering::animation::Animation;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Eq, Hash, PartialEq)]
@@ -17,7 +17,6 @@ pub struct Ant {
     vel: Vec2,
     state: AntState,
     animation: Animation,
-    rect: Rect,
 }
 #[allow(dead_code)]
 impl Ant {
@@ -25,15 +24,9 @@ impl Ant {
         let pos = Vec2 { x: 100., y: 100. };
         Ant {
             pos: pos,
-            vel: Vec2 { x: 100., y: 100. },
+            vel: Vec2 { x: 10., y: 10. },
             state: AntState::FoodSearch,
-            animation: Animation::default(),
-            rect: Rect {
-                x: 0.,
-                y: 0.,
-                w: metadata.rect().w,
-                h: metadata.rect().h,
-            },
+            animation: animation,
         }
     }
 
@@ -56,8 +49,6 @@ impl Ant {
                 self.pos += self.vel * dt;
             }
         }
-        self.rect.x = self.pos.x;
-        self.rect.y = self.pos.y;
         self.animation.update(dt);
     }
 
