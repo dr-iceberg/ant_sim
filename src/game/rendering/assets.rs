@@ -3,30 +3,37 @@ use ggez::{
     graphics::{GraphicsContext, Image, Rect},
 };
 
+pub struct Asset {
+    img: Image,
+}
+
+impl Asset {
+    pub fn new(gfx: &GraphicsContext, path: &str) -> Self {
+        Asset {
+            img: Image::from_path(gfx, path).unwrap(),
+        }
+    }
+
+    pub fn img(&self) -> &Image {
+        &self.img
+    }
+}
+
 #[allow(dead_code)]
 pub struct AssetManager {
-    ant_png: Image,
-    ant_img: Image,
-    ant_sprites: Vec<Rect>,
+    ant_sprite_sheet: Asset,
 }
 
 impl AssetManager {
     pub fn new(gfx: &GraphicsContext) -> GameResult<AssetManager> {
         let ant_img = Image::from_path(gfx, "/ant_sprite.png").unwrap();
-        let ant_png = Image::from_path(gfx, "/ant.png").unwrap();
 
         Ok(AssetManager {
-            ant_png: ant_png,
-            ant_img: ant_img,
-            ant_sprites: Vec::new(),
+            ant_sprite_sheet: Asset { img: ant_img },
         })
     }
     #[allow(dead_code)]
-    pub fn ant_img(&self) -> &Image {
-        &self.ant_img
-    }
-
-    pub fn ant_png(&self) -> &Image {
-        &self.ant_png
+    pub fn ant_sprite_sheet(&self) -> &Asset {
+        &self.ant_sprite_sheet
     }
 }

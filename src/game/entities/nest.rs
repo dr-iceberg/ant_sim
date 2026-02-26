@@ -1,6 +1,9 @@
 use ggez::{Context, glam::Vec2};
 
-use crate::game::entities::ant::Ant;
+use crate::game::{
+    entities::ant::Ant,
+    rendering::{animation::AnimationManager, assets::AssetManager},
+};
 
 #[allow(dead_code)]
 #[derive(Debug)]
@@ -12,7 +15,13 @@ pub struct Nest {
 
 #[allow(dead_code)]
 impl Nest {
-    pub fn new(ant_count: i32, starting_food: u32, pos: Vec2) -> Self {
+    pub fn new(ant_count: i32, starting_food: u32, pos: Vec2, assets: &AssetManager) -> Self {
+        let ants: Vec<Ant> = Vec::new();
+
+        for i in 0..ant_count {
+            let mut ant = Ant::new();
+        }
+
         Nest {
             ants: vec![Ant::new(); ant_count as usize],
             pos: pos,

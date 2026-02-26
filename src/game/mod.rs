@@ -1,5 +1,4 @@
 pub(crate) mod entities;
-pub(crate) mod on_event;
 pub(crate) mod rendering;
 pub(crate) mod state;
 pub(crate) mod world;

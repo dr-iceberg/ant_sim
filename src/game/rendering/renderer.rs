@@ -11,7 +11,6 @@ use crate::game::world::World;
 
 #[allow(dead_code)]
 pub struct Renderer {
-    assets: AssetManager,
     food_mesh: Mesh,
     nest_mesh: Mesh,
 }
@@ -39,33 +38,40 @@ impl Renderer {
         .unwrap();
 
         Self {
-            assets: AssetManager::new(gfx).unwrap(),
             food_mesh: food_mesh,
             nest_mesh: nest_mesh,
         }
     }
 
-    pub fn render_world(&mut self, _ctx: &Context, canvas: &mut Canvas, world: &World) {
+    pub fn render_world(
+        &mut self,
+        _ctx: &Context,
+        canvas: &mut Canvas,
+        world: &World,
+        assets: &AssetManager,
+    ) {
         self.render_nest(canvas, world.nest());
         for food in world.food_vec() {
             self.render_food(canvas, food);
         }
         for ant in world.nest().ants() {
-            self.render_ant(ant, canvas);
+            self.render_ant(ant, canvas, assets);
         }
     }
 
-    fn render_ant(&mut self, ant: &Ant, canvas: &mut Canvas) {
+    fn render_ant(&mut self, ant: &Ant, canvas: &mut Canvas, assets: &AssetManager) {
         // this is a different angle for rotation
         let angle = ant.vel().angle_between(Vec2 { x: -1., y: 0. });
         let scale = 0.2;
+        let rect = ant.animation().get_current_frame();
         canvas.draw(
-            self.assets.ant_png(),
+            assets.ant_sprite_sheet().img(),
             DrawParam::default()
                 .dest(ant.pos())
                 .rotation(angle)
                 .offset([0.5, 0.5])
-                .scale([scale, scale]),
+                .scale([scale, scale])
+                .src(rect),
         );
     }
 
