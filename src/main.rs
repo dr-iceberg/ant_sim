@@ -1,5 +1,5 @@
 use ggez::GameResult;
-use rust_game::game;
+use ant_sim::game;
 
 pub fn main() -> GameResult {
     game::run()

@@ -116,6 +116,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "ant_sim"
+version = "0.1.0"
+dependencies = [
+ "ggez",
+ "rand 0.10.0",
+]
+
+[[package]]
 name = "anyhow"
 version = "1.0.101"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2133,14 +2141,6 @@ dependencies = [
  "hound",
  "lewton",
  "symphonia",
-]
-
-[[package]]
-name = "rust_game"
-version = "0.1.0"
-dependencies = [
- "ggez",
- "rand 0.10.0",
 ]
 
 [[package]]
